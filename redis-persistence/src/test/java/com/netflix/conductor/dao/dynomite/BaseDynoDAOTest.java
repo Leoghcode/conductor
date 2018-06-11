@@ -32,17 +32,17 @@ public class BaseDynoDAOTest {
 
     @Test
     public void testNsKey() {
-        assertEquals(baseDynoDAO.nsKey(), "");
+        assertEquals("", baseDynoDAO.nsKey());
 
         String[] keys = {"key1", "key2"};
-        assertEquals(baseDynoDAO.nsKey(keys), "key1.key2");
+        assertEquals("key1.key2", baseDynoDAO.nsKey(keys));
 
         Mockito.when(config.getProperty("workflow.namespace.prefix", null)).thenReturn("test");
-        assertEquals(baseDynoDAO.nsKey(), "test");
+        assertEquals("test", baseDynoDAO.nsKey());
 
-        assertEquals(baseDynoDAO.nsKey(keys), "test.key1.key2");
+        assertEquals("test.key1.key2", baseDynoDAO.nsKey(keys));
 
         Mockito.when(config.getStack()).thenReturn("stack");
-        assertEquals(baseDynoDAO.nsKey(keys), "test.stack.key1.key2");
+        assertEquals("test.stack.key1.key2", baseDynoDAO.nsKey(keys));
     }
 }
